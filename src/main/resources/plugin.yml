@@ -1,0 +1,4 @@
+name: MyWorldSystem
+version: '${project.version}'
+main: com.pwisetthon.myworldsystem.MyWorldSystem
+api-version: '1.20'
