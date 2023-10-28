@@ -44,7 +44,7 @@ public class Mech implements Listener {
         }
         try {
 //            List<Map<String, Object>> lastLocation = connectdatabases.getLastLocation(event.getPlayer().getName());
-            List<Map<String, Object>> lastLocation = plugin.getConnectdatabases().getLastLocation(event.getPlayer().getName());
+            List<Map<String, Object>> lastLocation = plugin.getLitedatabases().getLastLocation(event.getPlayer().getName());
             if (lastLocation != null) {
                 //get player BoyPhongsakorn in list
                 for (Map<String, Object> map : lastLocation) {
@@ -117,7 +117,7 @@ public class Mech implements Listener {
         }
         try {
 //            connectdatabases.saveLocation(event.getPlayer().getName(), event.getPlayer().getWorld().getName(), event.getPlayer().getLocation().getX(), event.getPlayer().getLocation().getY(), event.getPlayer().getLocation().getZ(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch());
-            plugin.getConnectdatabases().saveLocation(event.getPlayer().getName(), event.getPlayer().getWorld().getName(), event.getPlayer().getLocation().getX(), event.getPlayer().getLocation().getY(), event.getPlayer().getLocation().getZ(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch());
+            plugin.getLitedatabases().saveLocation(event.getPlayer().getName(), event.getPlayer().getWorld().getName(), event.getPlayer().getLocation().getX(), event.getPlayer().getLocation().getY(), event.getPlayer().getLocation().getZ(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,7 +150,10 @@ public class Mech implements Listener {
                         //get current location
                         Location loc = event.getFrom();
                         System.out.println("Current location: " + loc.getX() + " " + loc.getY() + " " + loc.getZ());
-                        event.setTo(new Location(Bukkit.getWorld(fromWorld.getName() + "_nether"), loc.getX() / 8.0D, loc.getY(), loc.getZ() / 8.0D));
+                        //medium package
+//                        event.setTo(new Location(Bukkit.getWorld(fromWorld.getName() + "_nether"), loc.getX() / 8.0D, loc.getY(), loc.getZ() / 8.0D));
+                        //low package
+                        event.setTo(new Location(Bukkit.getWorld( "world_nether"), loc.getX() / 8.0D, loc.getY(), loc.getZ() / 8.0D));
                         break;
                     case NETHER:
 //                        event.setTo(Bukkit.getWorld(fromWorld.getName() + "_nether").getSpawnLocation());
@@ -158,8 +161,10 @@ public class Mech implements Listener {
                         //get current location
                         Location loc2 = event.getFrom();
                         System.out.println("Current location: " + loc2.getX() + " " + loc2.getY() + " " + loc2.getZ());
+                        //medium package
 //                        event.setTo(new Location(Bukkit.getWorld(fromWorld.getName().replace("_nether", "")), loc2.getX() * 8.0D, loc2.getY(), loc2.getZ() * 8.0D));
-                        event.setTo(new Location(Bukkit.getWorld("world_nether"), loc2.getX() * 8.0D, loc2.getY(), loc2.getZ() * 8.0D));
+                        //low package
+                        event.setTo(new Location(Bukkit.getWorld(event.getPlayer().getName()), loc2.getX() * 8.0D, loc2.getY(), loc2.getZ() * 8.0D));
                         break;
                     default:
                         break;

@@ -1,13 +1,15 @@
 package com.pwisetthon.myworldsystem;
 
 import com.pwisetthon.myworldsystem.database.connectdatabase;
+import com.pwisetthon.myworldsystem.database.maindatabase;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MyWorldSystem extends JavaPlugin {
 
-    private connectdatabase connectdatabases;
+    private connectdatabase litedatabase;
+    private maindatabase mariadb;
 
     @Override
     public void onEnable() {
@@ -19,7 +21,8 @@ public final class MyWorldSystem extends JavaPlugin {
             if (!getDataFolder().exists()) {
                 getDataFolder().mkdirs();
             }
-            connectdatabases = new connectdatabase(getDataFolder().getAbsolutePath() + "/last_location.db");
+            litedatabase = new connectdatabase(getDataFolder().getAbsolutePath() + "/last_location.db");
+            mariadb = new maindatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,13 +34,17 @@ public final class MyWorldSystem extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         try {
-            connectdatabases.closeConnection();
+            litedatabase.closeConnection();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public connectdatabase getConnectdatabases() {
-        return connectdatabases;
+    public connectdatabase getLitedatabases() {
+        return litedatabase;
+    }
+
+    public maindatabase getConnectdatabases() {
+        return mariadb;
     }
 }
